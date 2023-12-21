@@ -7,6 +7,7 @@ import PostEdit from "../pages/posts/edit";
 import ProfilePage from "../pages/profile";
 import LoginPage from "../pages/login";
 import SignupPage from "../pages/signin";
+import PostPage from "../pages/posts/detail";
 
 export default function Router() {
   return (
@@ -17,7 +18,7 @@ export default function Router() {
 
         {/* POST */}
         <Route path="/posts" element={<PostList />} />
-        <Route path="/posts/:id" element={<PostDetail />} />
+        <Route path="/posts/:id" element={<PostPage />} />
         <Route path="/posts/new" element={<PostNew />} />
         <Route path="/posts/edit/:id" element={<PostEdit />} />
 
