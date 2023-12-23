@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { app } from "firebaseApp";
@@ -12,13 +12,15 @@ export default function LoginForm() {
   const [error, setError] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const navigate = useNavigate();
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const auth = getAuth(app);
       await signInWithEmailAndPassword(auth, email, password);
-      toast.success("로그인에 성공하셨습니다.");
+      toast.success(`${auth.currentUser?.email} 님 반갑습니다`);
+      navigate("/");
     } catch (error) {
       toast.error("아이디 혹은 비밀번호가 일치하지 않습니다.");
       console.log("error: ", error);
