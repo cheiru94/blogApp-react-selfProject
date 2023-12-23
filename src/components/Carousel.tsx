@@ -10,7 +10,6 @@ const IMAGE_3_URL =
 export default function Carousel() {
   /* 현재 클릭된 이미지가 어떤 것인지 저장하는 변수 */
   const [activeImage, setActiveImage] = useState(1);
-  console.log("activeImage: ", activeImage);
 
   return (
     <div>
