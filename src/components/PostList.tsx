@@ -1,8 +1,9 @@
 import AuthContext from "context/AuthContext";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs,deleteDoc, doc } from "firebase/firestore";
 import { db } from "firebaseApp";
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
+import { toast } from "react-toastify";
 
 interface postListProps {
   hasNavigation?: boolean;
@@ -17,6 +18,8 @@ export interface PostProps {
   summary: string;
   content: string;
   createdAt: string;
+  updatedAt?: string;
+  uid: string;
 }
 
 // 디폴트 값 hasNavigation = true
@@ -24,23 +27,31 @@ export default function PostList({ hasNavigation = true }: postListProps) {
   const [activeTab, setActiveTab] = useState<TabType>("all");
   const [posts, setPosts] = useState<PostProps[]>([]);
   const { user } = useContext(AuthContext);
-
+  const navigate = useNavigate();
   const getPosts = async () => {
     const datas = await getDocs(collection(db, "posts"));
 
-    // console.log(datas);
-
+    // 기존에 있었던 posts의 내용을 다 비우기 -> 이걸 하지 않으면 데이터가 계속 중복해서 쌓이는 문제가 발생했음.
+    setPosts([]);
     datas?.forEach((doc) => {
       const dataObj = { ...doc.data(), id: doc.id };
       setPosts((prev) => [...prev, dataObj as PostProps]);
     });
   };
 
-  console.log(posts);
+  const handleDelete = async (id: string) => {
+    const confirm = window.confirm('해당 게시물을 정말 삭제하시겠습니까?');
+    if (confirm && id) {
+      await deleteDoc(doc(db, 'posts', id))
+      toast.success('게시글이 삭제되었습니다!')
+      getPosts();
+    }
+  }
 
   useEffect(() => {
     getPosts();
-  }, []);
+  },[]);
+   
   return (
     <>
       {hasNavigation && (
@@ -78,7 +89,7 @@ export default function PostList({ hasNavigation = true }: postListProps) {
               </Link>
               {post?.email === user?.email && (
                 <div className="post__utils-box">
-                  <div className="post__delete">삭제 </div>
+                  <div className="post__delete" role="presentation" onClick={()=>{handleDelete(post .id as string)}}>삭제 </div>
                   <Link to={`/posts/edit/${post?.id}`} className="post__edit">
                     수정
                   </Link>
