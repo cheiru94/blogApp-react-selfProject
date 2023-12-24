@@ -6,12 +6,21 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { PostProps } from "./PostList";
 
+export type CategoryType = "Frontend" | "Backend" | "Web" | "Native";
+export const CATEGORIES: CategoryType[] = [
+  "Frontend",
+  "Backend",
+  "Web",
+  "Native",
+];
+
 export default function PostForm() {
   const params = useParams();
   const [post, setPost] = useState<PostProps | null>(null);
-  const [title, setTitle] = useState("");
-  const [summary, setSummary] = useState("");
-  const [content, setContent] = useState("");
+  const [title, setTitle] = useState<string>("");
+  const [summary, setSummary] = useState<string>("");
+  const [content, setContent] = useState<string>("");
+  const [category, setCategory] = useState<CategoryType>("Frontend");
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -31,6 +40,7 @@ export default function PostForm() {
             minute: "2-digit",
             second: "2-digit",
           }),
+          category: category,
         });
         toast?.success("게시글이 수정되었습니다.");
         navigate(`/posts/${post.id}`);
@@ -47,6 +57,7 @@ export default function PostForm() {
           }),
           email: user?.email,
           uid: user?.uid,
+          category: category,
         });
         toast?.success("게시글이 생성되었습니다.");
         navigate("/");
@@ -57,7 +68,9 @@ export default function PostForm() {
   };
 
   const onChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     const {
       target: { name, value },
@@ -71,6 +84,9 @@ export default function PostForm() {
     }
     if (name === "content") {
       setContent(value);
+    }
+    if (name === "category") {
+      setCategory(value as CategoryType);
     }
   };
 
@@ -92,13 +108,14 @@ export default function PostForm() {
       setTitle(post?.title);
       setSummary(post?.summary);
       setContent(post?.content);
+      setCategory(post?.category as CategoryType);
     }
   }, [post]);
 
   return (
     <form onSubmit={onSubmit} className="form">
       <div className="form__block">
-        <label htmlFor="title">タイトル</label>
+        <label htmlFor="title">제목</label>
         <input
           type="text"
           name="title"
@@ -107,6 +124,22 @@ export default function PostForm() {
           onChange={onChange}
           value={title}
         />
+      </div>
+      <div className="form__block">
+        <label htmlFor="category">카테고리</label>
+        <select
+          name="category"
+          id="category"
+          onChange={onChange}
+          defaultValue={category}
+        >
+          <option value="">카테고리 선택</option>
+          {CATEGORIES?.map((category) => (
+            <option value={category} key={category}>
+              {category}
+            </option>
+          ))}
+        </select>
       </div>
       <div className="form__block">
         <label htmlFor="summary">요약</label>
