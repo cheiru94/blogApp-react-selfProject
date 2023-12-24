@@ -8,7 +8,7 @@ interface AuthProps {
 
 //  컨텍스트 만듬
 const AuthContext = createContext({
-  user: null as User | null,
+  user: null as User | null, // 초기 값입력
 });
 
 export const AuthContextProvider = ({ children }: AuthProps) => {
@@ -26,7 +26,9 @@ export const AuthContextProvider = ({ children }: AuthProps) => {
   }, [auth]);
 
   return (
-    <AuthContext.Provider value={{ user: currentUser }}></AuthContext.Provider>
+    <AuthContext.Provider value={{ user: currentUser }}>
+      {children}
+    </AuthContext.Provider>
   );
 };
 

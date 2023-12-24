@@ -10,6 +10,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <AuthContextProvider>
+    {/* 서비스 프로바이더로 context api 제공 */}
     <Router>
       <App />
     </Router>

@@ -1,5 +1,6 @@
 import { initializeApp, FirebaseApp, getApp } from "firebase/app";
 import "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 export let app: FirebaseApp; // app을 지역변수로 선언해준 후에 try catch문으로 할당을 한다.
 
@@ -24,5 +25,7 @@ try {
 
 // Initialize Firebase
 const firebase = initializeApp(firebaseConfig);
+
+export const db = getFirestore(app); // 파이어베이스에서 db 가져오기
 
 export default firebase;

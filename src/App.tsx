@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Router from "./components/Router";
 
 /* firebase */
-import { app } from "firebaseApp"; //  firebaseApp에서 선언한 app
+import { app, db } from "firebaseApp"; //  firebaseApp에서 선언한 app
 import { getAuth, onAuthStateChanged } from "firebase/auth"; // 현재 사용자가 로그인 되어있는지 유무를 판별한다.
 
 /* react-toastify */

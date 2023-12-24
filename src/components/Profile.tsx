@@ -16,8 +16,9 @@ const onSubmit = async () => {
   }
 };
 
-export const Profile = () => {
+export default function Profile() {
   const { user } = useContext(AuthContext);
+  console.log("user: ", user);
 
   return (
     <>
@@ -39,4 +40,4 @@ export const Profile = () => {
       </div>
     </>
   );
-};
+}
