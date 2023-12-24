@@ -1,12 +1,21 @@
 import AuthContext from "context/AuthContext";
-import { collection, getDocs,deleteDoc, doc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  deleteDoc,
+  doc,
+  query,
+  orderBy,
+  where,
+} from "firebase/firestore";
 import { db } from "firebaseApp";
 import React, { useContext, useEffect, useState } from "react";
-import { Link ,useNavigate} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 interface postListProps {
   hasNavigation?: boolean;
+  defaultTab?: TabType;
 }
 
 type TabType = "all" | "my";
@@ -23,16 +32,34 @@ export interface PostProps {
 }
 
 // 디폴트 값 hasNavigation = true
-export default function PostList({ hasNavigation = true }: postListProps) {
-  const [activeTab, setActiveTab] = useState<TabType>("all");
+export default function PostList({
+  hasNavigation = true,
+  defaultTab = "all",
+}: postListProps) {
+  const [activeTab, setActiveTab] = useState<TabType>(defaultTab);
   const [posts, setPosts] = useState<PostProps[]>([]);
   const { user } = useContext(AuthContext);
-  const navigate = useNavigate();
-  const getPosts = async () => {
-    const datas = await getDocs(collection(db, "posts"));
 
+  const getPosts = async () => {
     // 기존에 있었던 posts의 내용을 다 비우기 -> 이걸 하지 않으면 데이터가 계속 중복해서 쌓이는 문제가 발생했음.
     setPosts([]);
+    let postsRef = collection(db, "posts");
+    let postsQuery;
+
+    /* 탭에 따라서  */
+    // 로그인한 유저의 내용 보여주기
+    if (activeTab === "my" && user) {
+      // 로그인 되지 않은 전체 내용 보여주기
+      postsQuery = query(
+        postsRef,
+        where("uid", "==", user.uid),
+        orderBy("createdAt", "desc")
+      );
+    } else {
+      postsQuery = query(postsRef, orderBy("createdAt", "desc"));
+    }
+
+    const datas = await getDocs(postsQuery);
     datas?.forEach((doc) => {
       const dataObj = { ...doc.data(), id: doc.id };
       setPosts((prev) => [...prev, dataObj as PostProps]);
@@ -40,18 +67,20 @@ export default function PostList({ hasNavigation = true }: postListProps) {
   };
 
   const handleDelete = async (id: string) => {
-    const confirm = window.confirm('해당 게시물을 정말 삭제하시겠습니까?');
+    const confirm = window.confirm("해당 게시물을 정말 삭제하시겠습니까?");
     if (confirm && id) {
-      await deleteDoc(doc(db, 'posts', id))
-      toast.success('게시글이 삭제되었습니다!')
+      await deleteDoc(doc(db, "posts", id));
+      toast.success("게시글이 삭제되었습니다!");
       getPosts();
     }
-  }
+  };
+
+  console.log(posts);
 
   useEffect(() => {
     getPosts();
-  },[]);
-   
+  }, [activeTab]);
+
   return (
     <>
       {hasNavigation && (
@@ -89,7 +118,15 @@ export default function PostList({ hasNavigation = true }: postListProps) {
               </Link>
               {post?.email === user?.email && (
                 <div className="post__utils-box">
-                  <div className="post__delete" role="presentation" onClick={()=>{handleDelete(post .id as string)}}>삭제 </div>
+                  <div
+                    className="post__delete"
+                    role="presentation"
+                    onClick={() => {
+                      handleDelete(post.id as string);
+                    }}
+                  >
+                    삭제{" "}
+                  </div>
                   <Link to={`/posts/edit/${post?.id}`} className="post__edit">
                     수정
                   </Link>
