@@ -30,7 +30,7 @@ export default function Router({ isAuthenticated }: RouterProps) {
             <Route path="/posts/edit/:id" element={<PostEdit />} />
             {/* PROFILE */}
             <Route path="/profile" element={<ProfilePage />} />
-            {/* LOGIN , SIGNUP */}
+            {/* LOGIN , SIGNUP  - 로그인 되었으면 항상 home으로 보여준다.*/}
             {/* <Route path="/login" element={<LoginPage />} /> */}
             {/* <Route path="/signup" element={<SignupPage />} /> */}
             {/* 위에서 정의 되어있지 않은 경로로 접근 시  */}
