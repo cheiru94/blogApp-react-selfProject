@@ -16,11 +16,11 @@ const firebaseConfig = {
 };
 
 // const firebase = initializeApp(firebaseConfig);
-
+/* 이렇게 함으로써, 이 코드는 "app" 이름의 Firebase 앱이 항상 초기화되어 있음을 보장한다. */
 try {
-  app = getApp("app");
+  app = getApp("app"); // getApp 메서드는 이미 초기화된 Firebase 앱의 인스턴스를 가져오는 데 사용
 } catch (e) {
-  app = initializeApp(firebaseConfig, "app");
+  app = initializeApp(firebaseConfig, "app"); // Firebase 앱을 생성하고 초기화하는 역할
 }
 
 // Initialize Firebase

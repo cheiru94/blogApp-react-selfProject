@@ -15,6 +15,7 @@ export default function Carousel() {
     <div>
       <div className="carousel">
         <ul className="carousel__slides">
+          <input type="radio" />
           <input
             type="radio"
             name="radio-buttons"
