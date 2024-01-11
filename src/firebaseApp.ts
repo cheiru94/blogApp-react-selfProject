@@ -4,8 +4,9 @@ import { getFirestore } from "firebase/firestore";
 
 export let app: FirebaseApp; // app을 지역변수로 선언해준 후에 try catch문으로 할당을 한다.
 
-// Your web app's Firebase configuration
+/* Firebase 앱의 설정 정보를 담은 객체  : Firebase 환경설정 */
 const firebaseConfig = {
+  
   // process.env.REACT_APP_ ~ 를 통해 환경 변수에서 값을 가져와 사용하기
   apiKey: process.env.REACT_APP_API_KEY, // 리엑트에서 사용할때는 반드시 REACT_APP_ 어노테이션을 붙여야 한다.
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,

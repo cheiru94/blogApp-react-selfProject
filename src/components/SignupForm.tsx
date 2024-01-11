@@ -18,7 +18,16 @@ export default function SingupForm() {
     try {
       const auth = getAuth(app);
       await createUserWithEmailAndPassword(auth, email, password);
-      toast.success("회원가입에 성공했습니다!");
+      toast.success("회원가입에 성공했습니다!", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: 1,
+        theme: "light",
+      });
       navigate("/");
     } catch (error: any) {
       console.log(error);
@@ -28,10 +37,12 @@ export default function SingupForm() {
   };
   /* 입력 받은 내용이 올바른지 확인 */
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const {
-      target: { name, value },
-    } = e;
 
+    console.log("event 객체: ",e);
+
+    const { target: { name, value } } = e;
+    
+    console.log(name, value);
     if (name === "email") {
       setEmail(value);
       const validRegex =
