@@ -1,10 +1,11 @@
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { PostProps } from "./PostList";
 import { doc, getDoc, deleteDoc } from "firebase/firestore";
 import { db } from "firebaseApp";
 import Loader from "./Loader";
 import { toast } from "react-toastify";
+import AuthContext from "context/AuthContext";
 
 export const PostDetail = () => {
   const [post, setPost] = useState<PostProps | null>(null);
@@ -28,6 +29,8 @@ export const PostDetail = () => {
     }
   };
 
+  const { user } = useContext(AuthContext);
+
   useEffect(() => {
     if (params?.id) getpost(params?.id);
   }, [params?.id]);
@@ -43,22 +46,25 @@ export const PostDetail = () => {
             <div className="post__author-name">{post.email}</div>
             <div className="post__date">{post.createdAt}</div>
           </div>
-          <div className="post__utils-box">
-            {post?.category && (
-              <div className="post__category">{post?.category}</div>
-            )}
+          {post?.email === user?.email && (
+            <div className="post__utils-box">
+              {post?.category && (
+                <div className="post__category">{post?.category}</div>
+              )}
 
-            <div
-              className="post__delete"
-              role="presentation"
-              onClick={handleDelete}
-            >
-              삭제{" "}
+              <div
+                className="post__delete"
+                role="presentation"
+                onClick={handleDelete}
+              >
+                삭제{" "}
+              </div>
+              <div className="post__edit">
+                <Link to={`/posts/edit/${post?.id}`}>수정</Link>
+              </div>
             </div>
-            <div className="post__edit">
-              <Link to={`/posts/edit/${post?.id}`}>수정</Link>
-            </div>
-          </div>
+          )}
+
           <div className="post__text post_text--pre-wrap">{post?.content}</div>
         </div>
       ) : (
