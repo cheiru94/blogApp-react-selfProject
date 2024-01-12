@@ -12,7 +12,8 @@ code {
     monospace;
 }
 
-/* hearder */
+/* header */
+
 header {
   display: flex;
   justify-content: space-between;
@@ -22,74 +23,85 @@ header {
   min-height: 40px;
   align-items: center;
 }
+
 header .header__logo {
   color: black;
   font-weight: 600;
   font-size: 18px;
 }
+
 header a {
   margin: 0px 10px;
   text-decoration: none;
   color: gray;
-  transition: 0.5s;
 }
+
 header a:focus,
 header a:hover {
   color: black;
 }
 
+/* footer */
 footer {
   background-color: #f2f2f2;
-  min-height: 40px; /* 최소한의 높이 */
+  min-height: 40px;
   padding: 20px 40px;
   font-size: 14px;
+  text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px; /* flex안 요소들과의 폭 */
+  gap: 20px;
 }
 
 footer a {
   text-decoration: none;
   color: gray;
-  transition: 0.5s;
 }
+
 footer a:focus,
 footer a:hover {
   color: black;
 }
 
+.footer__theme-btn {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+}
+
+/* post navigation */
 .post__navigation {
   display: flex;
   gap: 12px;
-  margin: 0 auto; /* 가운데 정렬 */
+  margin: 0 auto;
   max-width: 680px;
   font-size: 16px;
-  color: grey;
+  color: gray;
   cursor: pointer;
-  padding: 48px 20px 0;
+  padding: 48px 20px 0px 20px;
 }
 
 .post__navigation--active {
   color: black;
   font-weight: 600;
-  transition: 0.8s;
 }
 
-/*  post__list, post__detail */
+/* post list, post detail */
 .post__list,
 .post__detail {
   min-height: 90vh;
-  padding: 20px 40px;
+  padding: 20px;
   text-align: center;
   max-width: 680px;
-  margin: 0 auto; /* 가운데 정렬 */
+  margin: 0 auto;
   text-align: left;
   line-height: 24px;
 }
 
 .post__box {
-  padding: 24px 0 24px;
+  padding-top: 24px;
+  padding-bottom: 24px;
   border-top: 1px solid #f2f2f2;
 }
 
@@ -99,10 +111,11 @@ footer a:hover {
   font-size: 14px;
   align-items: center;
 }
+
 .post__profile {
   width: 36px;
   height: 36px;
-  background-color: #f2f2f2;
+  background: #f2f2f2;
   border-radius: 50%;
 }
 
@@ -113,24 +126,26 @@ footer a:hover {
 
 .post__title {
   font-size: 20px;
-  font-weight: 700;
-  margin: 10px 0;
+  font-weight: 600;
+  margin: 14px 0px;
 }
+
 .post__text {
   color: dimgray;
-  font-style: 16px;
+  font-size: 16px;
 }
+
 .post__list a {
   text-decoration: none;
   color: black;
 }
+
 .post__utils-box {
   display: flex;
   gap: 8px;
   flex-direction: row-reverse;
-  font-style: 14px;
-  color: grey;
-  margin-top: 10px;
+  font-size: 14px;
+  color: gray;
 }
 
 .post__delete {
@@ -138,13 +153,15 @@ footer a:hover {
 }
 
 .post__delete:hover,
-.post__delete:focus,
+.post__delete:focus {
+  color: black;
+}
+
 .post__edit:hover,
 .post__edit:focus,
 .post__edit a:hover,
 .post__edit a:focus {
   color: black;
-  transition: 0.5s;
 }
 
 .post__edit a {
@@ -157,7 +174,7 @@ footer a:hover {
   text-align: center;
   color: gray;
   border: 1px solid #f2f2f2;
-  border-radius: 10px;
+  border-radius: 20px;
 }
 
 /* post detail */
@@ -168,33 +185,35 @@ footer a:hover {
 }
 
 .post__detail .post__utils-box {
-  padding: 10px 0;
+  padding: 10px 0px;
   border-top: 1px solid #f2f2f2;
   border-bottom: 1px solid #f2f2f2;
   flex-direction: row;
 }
 
 .post__detail .post__profile-box {
-  padding: 10px 0;
-}
-.post__detail .post__text {
-  padding: 20px 0;
+  padding: 10px 0px;
 }
 
-.post_text--pre-wrap {
+.post__detail .post__text {
+  padding: 20px 0px;
+}
+
+.post__text--pre-wrap {
   white-space: pre-wrap;
 }
 
 .post__category {
   color: gray;
   border: 1px solid lightgray;
-  background: #f2f2f2;
+  backgroud: #f2f2f2;
   padding: 0px 4px;
   border-radius: 10px;
   font-size: 12px;
 }
 
-/* PROFILE */
+/* profile */
+
 .profile__box {
   display: flex;
   gap: 18px;
@@ -205,33 +224,38 @@ footer a:hover {
   text-align: left;
   line-height: 24px;
   justify-content: space-between;
-  /* justify-content: space-around; */
   padding: 20px;
 }
+
 .flex__box-lg {
   display: flex;
   gap: 18px;
   align-items: center;
 }
+
 .profile__image {
   width: 72px;
   height: 72px;
   background-color: #f2f2f2;
   border-radius: 50%;
 }
+
 .profile__name {
   font-size: 16px;
   padding-top: 4px;
 }
+
 .profile__email {
   font-weight: 500;
 }
+
 .profile__logout {
   color: gray;
   font-size: 14px;
-  text-decoration: none;
   cursor: pointer;
+  text-decoration: underline;
 }
+
 .profile__logout:hover,
 .profile__logout:focus {
   color: black;
@@ -366,11 +390,8 @@ input#img-3:checked ~ .carousel__dots label#img-dot-3 {
 input:checked + .carousel__slide-container .nav label {
   display: block;
 }
-/* .carousel__slide-img img {
-  border-radius: 10px;
-} */
 
-/* FORM */
+/* form */
 .form {
   margin: 0 auto;
   max-width: 680px;
@@ -387,8 +408,9 @@ input:checked + .carousel__slide-container .nav label {
   width: 96%;
   max-width: 680px;
 }
+
 .form textarea {
-  min-height: 300px;
+  min-height: 400px;
   padding: 10px 10px;
   font-size: 16px;
   line-height: 1.5;
@@ -398,66 +420,73 @@ input:checked + .carousel__slide-container .nav label {
   max-width: 680px;
 }
 
-.form__block {
-  margin-top: 30px;
+.form .form__block {
+  margin-top: 20px;
   width: 100%;
 }
+
 .form label {
   display: block;
-  font-weight: 600;
-  margin-top: 10px;
-  margin-bottom: 20px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  margin-top: 20px;
 }
+
 .form .form__btn--submit {
   width: 100%;
   height: 48px;
+  font-weight: 600;
   padding: 10px 10px;
   float: right;
-  margin: 0 auto;
   cursor: pointer;
+  margin: 0 auto;
   font-size: 16px;
   background-color: #2563eb;
   color: white;
-  margin-bottom: 100px;
 }
+
 .form .form__btn--submit:hover,
 .form .form__btn--submit:focus {
   background-color: #1945a4;
 }
 
 /* login form */
+
 .form--lg {
   min-height: 70vh;
   margin-top: 10vh;
 }
-.form_title {
+
+.form__title {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 4px;
 }
 
-.form_link {
+.form__link {
   margin-left: 10px;
   text-decoration: none;
   color: gray;
-  cursor: pointer;
 }
-.form_link:hover,
-.form_link:focus {
-  color: #2563eb;
+
+.form__link:hover,
+.form__link:focus {
+  color: black;
 }
 
 .form__error {
   color: red;
 }
 
-/* loader */
 .form select {
   border: 1px solid lightgray;
   max-width: 680px;
-  height: 50px;
+  height: 40px;
   padding: 0px 20px;
+  font-size: 16px;
   border-radius: 0.3rem;
 }
+
+/* loader */
 
 .loader {
   width: 48px;
@@ -472,4 +501,154 @@ input:checked + .carousel__slide-container .nav label {
   border-radius: 50%;
   z-index: 9999;
   animation: rotation 1s linear infinite;
+}
+
+/* comments */
+
+.comments {
+  width: 100%;
+}
+
+.comments__form label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.comments__form textarea {
+  min-height: 100px;
+  padding: 10px;
+  font-size: 16px;
+  line-height: 1.5;
+  border-radius: 0.3rem;
+  border: 1px solid lightgray;
+  display: block;
+  width: 100%;
+  max-width: 680px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.comments__form .form__block {
+  margin-top: 10px;
+  width: 100%;
+  height: 100%;
+}
+
+.comments__form .form__btn-submit {
+  width: 100px;
+  height: 36px;
+  cursor: pointer;
+  font-weight: 500;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.form__block-reverse {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.comments__form .form__btn-submit:hover,
+.comments__form .form__btn-submit:focus {
+  background-color: #1945a4;
+}
+
+.comments__list {
+  margin-top: 40px;
+  margin-bottom: 100px;
+}
+
+.comment__box {
+  padding: 12px 0px;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.comment__profile-box {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 12px;
+}
+
+.comment__email {
+  font-weight: 500;
+}
+
+.comment__date {
+  color: gray;
+}
+
+.comment__delete {
+  color: gray;
+  font-size: 12px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.comment__delete:hover,
+.comment__delete:focus {
+  color: black;
+}
+
+.comment__text {
+  font-size: 14px;
+  padding-top: 4px;
+}
+
+/* dark mode */
+
+.white {
+  transition: all 0.25s linear;
+  background-color: white;
+}
+
+.dark {
+  transition: all 0.25s linear;
+  background-color: #1e2937;
+  min-height: 100vh;
+}
+
+.dark a,
+.dark .form label,
+.dark .post__delete,
+.dark .profile__logout,
+.dark .form__title,
+.dark .post__navigation--active,
+.dark .post__title,
+.dark .post__author-name,
+.dark .footer__theme-btn,
+.dark .profile__name,
+.dark .comments__list {
+  color: white;
+}
+
+.dark a:hover,
+.dark a:focus,
+.dark .post__text,
+.dark .post__text--pre-wrap,
+.dark .profile__email,
+.dark .post__date,
+.dark .form__block,
+.dark .comment__date,
+.dark .comment__delete {
+  color: lightgray;
+}
+
+.dark .comment__delete:hover,
+.dark .comment__delete:focus {
+  color: white;
+}
+
+.dark .form__error {
+  color: #ff6a71;
+}
+
+.dark footer,
+.dark header {
+  background-color: #111827;
 }

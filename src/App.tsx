@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Router from "./components/Router";
 
 /* firebase */
@@ -9,8 +9,11 @@ import { getAuth, onAuthStateChanged } from "firebase/auth"; // 현재 사용자
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "components/Loader";
+import ThemeContext from "context/ThemeContext";
 
 function App() {
+  const context = useContext(ThemeContext);
+
   const auth = getAuth(app); // app을 넣어줘야 동작을 한다.
 
   // auth를 체크하기 전에 (initailize 전)에는 Loader를 띄워주는 용도
@@ -34,20 +37,22 @@ function App() {
 
   return (
     <>
-      {/* 라우터 */}
-      <ToastContainer
-        position="top-center"
-        autoClose={1000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
-      {init ? <Router isAuthenticated={isAuthenticated} /> : <Loader />}
+      <div className={context.theme === "light" ? "white" : "dark"}>
+        {/* 라우터 */}
+        <ToastContainer
+          position="top-center"
+          autoClose={1000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+        {init ? <Router isAuthenticated={isAuthenticated} /> : <Loader />}
+      </div>
     </>
   );
 }
