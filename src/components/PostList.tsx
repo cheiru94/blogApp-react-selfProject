@@ -91,8 +91,6 @@ export default function PostList({
     }
   };
 
-  console.log(posts);
-
   useEffect(() => {
     getPosts();
   }, [activeTab]);

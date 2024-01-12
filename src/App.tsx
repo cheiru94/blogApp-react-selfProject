@@ -12,7 +12,6 @@ import Loader from "components/Loader";
 
 function App() {
   const auth = getAuth(app); // app을 넣어줘야 동작을 한다.
-  console.log("auth: ", auth);
 
   // auth를 체크하기 전에 (initailize 전)에는 Loader를 띄워주는 용도
   const [init, setInit] = useState<boolean>(false);
