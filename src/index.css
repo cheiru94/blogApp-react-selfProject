@@ -12,7 +12,7 @@ code {
     monospace;
 }
 
-/* header */
+/* 1. Header */
 
 header {
   display: flex;
@@ -41,7 +41,7 @@ header a:hover {
   color: black;
 }
 
-/* footer */
+/* 2. Footer */
 footer {
   background-color: #f2f2f2;
   min-height: 40px;
@@ -70,7 +70,7 @@ footer a:hover {
   height: 18px;
 }
 
-/* post navigation */
+/* 3. post navigation */
 .post__navigation {
   display: flex;
   gap: 12px;
@@ -87,7 +87,7 @@ footer a:hover {
   font-weight: 600;
 }
 
-/* post list, post detail */
+/* 4. Post list, Post detail */
 .post__list,
 .post__detail {
   min-height: 90vh;
@@ -177,7 +177,7 @@ footer a:hover {
   border-radius: 20px;
 }
 
-/* post detail */
+/* 5. Post detail */
 
 .post__detail .post__title {
   font-size: 36px;
@@ -212,7 +212,7 @@ footer a:hover {
   font-size: 12px;
 }
 
-/* profile */
+/* 6. Profile */
 
 .profile__box {
   display: flex;
@@ -261,7 +261,7 @@ footer a:hover {
   color: black;
 }
 
-/* carousel */
+/* ⭐️ 7. Carousel ⭐️ */
 
 .carousel {
   margin: 0 auto;
@@ -391,7 +391,7 @@ input:checked + .carousel__slide-container .nav label {
   display: block;
 }
 
-/* form */
+/* 8. Form */
 .form {
   margin: 0 auto;
   max-width: 680px;
@@ -486,7 +486,7 @@ input:checked + .carousel__slide-container .nav label {
   border-radius: 0.3rem;
 }
 
-/* loader */
+/* 9. Loader */
 
 .loader {
   width: 48px;
@@ -503,7 +503,7 @@ input:checked + .carousel__slide-container .nav label {
   animation: rotation 1s linear infinite;
 }
 
-/* comments */
+/* 10. Comments */
 
 .comments {
   width: 100%;
@@ -526,8 +526,8 @@ input:checked + .carousel__slide-container .nav label {
   display: block;
   width: 100%;
   max-width: 680px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box; /* "box-sizing"을 설정 : WebKit 기반 브라우저*/
+  -moz-box-sizing: border-box; /* "box-sizing"을 설정 : Gecko 기반 브라우저 */
   box-sizing: border-box;
 }
 
@@ -600,7 +600,7 @@ input:checked + .carousel__slide-container .nav label {
   padding-top: 4px;
 }
 
-/* dark mode */
+/* 11. Dark mode */
 
 .white {
   transition: all 0.25s linear;

@@ -18,6 +18,14 @@ interface postListProps {
   defaultTab?: TabType | CategoryType;
 }
 
+/* 코멘트 */
+export interface CommentsInterface {
+  content: string;
+  uid: string;
+  email: string;
+  createdAt: string;
+}
+
 export interface PostProps {
   id?: string;
   title: string;
@@ -28,6 +36,8 @@ export interface PostProps {
   updatedAt?: string;
   uid: string;
   category?: CategoryType;
+  /* 코멘트 */
+  comments?: CommentsInterface[];
 }
 
 type TabType = "all" | "my";
